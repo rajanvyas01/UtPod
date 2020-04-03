@@ -60,7 +60,7 @@ using namespace std;
    bool Song::operator >(Song const &rhs)
    {
       if(artist == rhs.artist){
-         if(title == title){
+         if(title == rhs.title){
             return (size > rhs.size);
          }
          return (title > rhs.title);
@@ -71,7 +71,7 @@ using namespace std;
    bool Song::operator <(Song const &rhs)
    {
       if(artist == rhs.artist){
-         if(title == title){
+         if(title == rhs.title){
             return (size < rhs.size);
          }
          return (title < rhs.title);
