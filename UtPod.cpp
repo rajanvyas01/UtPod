@@ -57,27 +57,27 @@ int UtPod::removeSong(Song const &s)
          return NOT_FOUND;
       }
    }
-   else{                      //more than one song on the list
-      if(songs->s == tempSong){
-         SongNode *temporary = songs;
-         songs = songs->next; //if removing head of list
+           //more than one song on the list
+   if(songs->s == tempSong){
+      SongNode *temporary = songs;
+      songs = songs->next; //if removing head of list
+      delete temporary;
+      return SUCCESS;
+   }
+   SongNode *temp = songs;
+   SongNode *prev = songs;
+   temp = temp->next;
+   while(temp != NULL){
+      if(temp->s == tempSong){
+         SongNode *temporary = temp;
+         prev->next = temp->next;
          delete temporary;
          return SUCCESS;
       }
-      SongNode *temp = songs;
-      SongNode *prev = temp;
-      while(temp != NULL){
-         temp = temp->next;
-         if(temp->s == tempSong){
-            SongNode *temporary = temp;
-            prev->next = temp->next;
-            delete temporary;
-            return SUCCESS;
-         }
-         prev = temp;
-      }
-      return NOT_FOUND;
+      prev = temp;
+      temp = temp->next;
    }
+   return NOT_FOUND;
 }
 
 void UtPod::shuffle()
