@@ -98,6 +98,25 @@ void UtPod::showSongList()
 
 void UtPod::sortSongList()
 {
+   SongNode *temp = songs;
+   SongNode *ptr;
+   SongNode *smallestNode = temp;
+   Song smallestSong;
+   while(temp != NULL){
+      ptr = temp->next;
+      smallestNode = temp;
+      while(ptr != NULL){
+         if(ptr->s < temp->s){
+            smallestNode = ptr;
+         }
+         ptr = ptr->next;
+      }
+      smallestSong = smallestNode->s;
+      smallestNode->s = temp->s;
+      temp->s = smallestSong;
+      temp = temp->next;
+   }
+
 }
     
 void UtPod::clearMemory()
