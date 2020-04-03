@@ -3,6 +3,7 @@
 #include "Song.h"
 #include "UtPod.h"
 #include <stdlib.h>
+#include <ctime>
 
 using namespace std;
 
@@ -82,6 +83,44 @@ int UtPod::removeSong(Song const &s)
 
 void UtPod::shuffle()
 {
+   if((songs == NULL) || (songs->next == NULL)){
+        return;
+    }
+
+    srand(time(0));
+    int numSongs = 0;
+    SongNode *song1 = songs;
+    SongNode *song2 = NULL;
+
+    while(song1 != NULL){
+        numSongs++;
+        song1 = song1->next;
+    }
+
+    if(numSongs < 2){
+        return;
+    }
+
+    for(int k = 0; k < (numSongs * 3); k++){
+        song1 = songs;
+        song2 = songs;
+        int rNum1 = (rand() % numSongs);
+        int rNum2 = (rand() % numSongs);
+
+        for(int i = 0; i < rNum1; i++){
+            song1 = song1->next;
+        }
+        for(int j = 0; j < rNum1; j++){
+            song2 = song2->next;
+        }
+
+        Song saveSong = song1->s;
+        song1->s = song2->s;
+        song2->s = saveSong;
+    }
+
+    return;
+
 }
 
 void UtPod::showSongList()
